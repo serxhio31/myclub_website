@@ -56,7 +56,7 @@ def event_list(request):
 def event_details(request, pk):
     event = get_object_or_404(Event, pk=pk)
     if request.method == "POST":
-        form = BuyTicketForm(request.POST)
+        form = BuyTicketForm(request.POST, available_tickets=event.tickets)
         if form.is_valid():
             tickets = form.cleaned_data.pop('tickets')
             club_user = MyClubUser.objects.create(**form.cleaned_data)
