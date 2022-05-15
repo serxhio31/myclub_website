@@ -1,0 +1,28 @@
+{% extends 'events/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<main role="main">
+  <div class="container">
+    <h1>{{ event.name }}</h1>
+    <h2>On {{ event.event_date }}</h2>
+    <p>Venue: {{ event.venue.name }}</p>
+    <p>Manager: {{ event.manager }}</p>
+    <p>Description: {{ event.description }}</p>
+
+    {% if event.tickets > 0 %}
+    <h4>Buy tickets</h4>
+    <h5>Available Tickets: {{ event.tickets }}</h5>
+    <form action="" method="post" novalidate>
+      {% csrf_token %} {{ form|crispy }}
+      <div>
+        <button type="submit">Buy</button>
+      </div>
+    </form>
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+      No more tickets available! Check back soon.
+    </div>
+    {% endif %}
+  </div>
+</main>
+{% endblock content %}

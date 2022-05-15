@@ -28,6 +28,7 @@ class Event(models.Model):
     manager = models.CharField(max_length=60)
     description = models.TextField(blank=True)
     attendees = models.ManyToManyField(MyClubUser, blank=True)
+    tickets = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.name
